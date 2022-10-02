@@ -4,6 +4,20 @@ export interface ICategory {
     attributes: ICategoryAttribute;
 }
 
+export interface IArticles{
+    id: number;
+    attributes: IArticleAttribute;
+}
+
+export interface IArticleAttribute{
+    Title: string;
+    body: string;
+    Slug: string;
+    Image: IImageData;
+    createdAt: string | Date; 
+    author: IAuthor;
+}
+
 export interface ICategoryAttribute {
     Title: string;
     Slug: string;
