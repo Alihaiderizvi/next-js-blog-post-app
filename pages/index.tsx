@@ -1,5 +1,8 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
+import { AxiosResponse } from "axios";
+import { fetchCategories } from "../http";
+import { ICategory, ICollectionResponse } from "../types";
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +20,21 @@ const Home: NextPage = () => {
       </main>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  //categories
+  const { data: categories }: AxiosResponse<ICollectionResponse<ICategory[]>> =
+    await fetchCategories();
+  console.log({ cat: categories.data });
+
+  return {
+    props: {
+      categories: {
+        items: categories?.data,
+      },
+    },
+  };
 };
 
 export default Home;
